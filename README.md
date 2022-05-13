@@ -48,10 +48,10 @@ Run the script by typing:
 		
 ## Data Processing MATLAB Script and Dependent Functions
 
-The output of the `presslog.py` script will output a CSV file that can be analyzed by the MATLAB script `pAnalysis.m`[^1]. `pAnalysis.m` can handle multiple CSVs output from `presslog.py`. All CSVs, `pAnalysis.m` and all  All of the required files are in the pAnalysis directory. The scripts and functions required for processing are as follows:
+The output of the `presslog.py` script will output a TXT file that can be analyzed by the MATLAB script `pAnalysis.m`[^1]. `pAnalysis.m` can handle multiple TXTs output from `presslog.py`. All TXTs, `pAnalysis.m` and all  All of the required files are in the pAnalysis directory. The scripts and functions required for processing are as follows:
 
-* `pAnalysis.m` - Script for Importing and Processing the CSVs outputed from `presslog.py`
-* `pDataImport.m` - Function that Imports a specified CSV to the MATLAB workspace
+* `pAnalysis.m` - Script for Importing and Processing the TXTs outputed from `presslog.py`
+* `pDataImport.m` - Function that Imports a specified TXT to the MATLAB workspace
 * `newMaterial.m` - Lookup table helper function to standarize material names
 * `pSpike.m` - Function to detect a sudden spike in pressure
 * `pCell2CSV.m` - Function to output a MATLAB cell contents to a CSV file
@@ -68,13 +68,13 @@ This script is designed to read pressure data from two differential pressure tra
 
 ***IMPORTANT:*** For the grouping of materials to happen properly, the nomenclature of the pressure files name must be the following format:
 
-    !Press#<material>#yyyy_mm_dd_HH-MM-SS.csv
+    !Press#<material>#yyyy_mm_dd_HH-MM-SS.txt
 
 This format is based on the output of `presslog.py` and the script is designed around it. 
    
    `!Press` at the start of the file name identifies if this a pressure  logging file. Any files that does not have this tag and not have an extention of TXT is not loaded for analysis.
 
-  `\<material\>` is the user entered material from the `presslog.py` and must be sperated pound signs (#) at the start and end of the material. There is a validation of the material in the file name and the material name in the file. If there is a discrepancy, a warning is displayed.
+  `<material>` is the user entered material from the `presslog.py` and must be sperated pound signs (#) at the start and end of the material. There is a validation of the material in the file name and the material name in the file. If there is a discrepancy, a warning is displayed.
 
   After the material is a time stamp of when then the analysis started. It must be in the format listed above as there is a validation of the time stamp in the name and the time stamp in the file. If there is a discrepancy, a warning is displayed.
 
@@ -86,7 +86,7 @@ This format is based on the output of `presslog.py` and the script is designed a
 
 | Input Parameter | Description |
 | :---: | :--- |
-| `filename` | char array of a CSV file name to import |
+| `filename` | char array of a TXT file name to import |
 
 ###  newMaterial.m
 
