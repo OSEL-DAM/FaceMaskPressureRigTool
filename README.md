@@ -68,7 +68,7 @@ This script is designed to read pressure data from two differential pressure tra
 
 ***IMPORTANT:*** For the grouping of materials to happen properly, the nomenclature of the pressure files name must be the following format:
 
-    !Press#\<material\>#yyyy_mm_dd_HH-MM-SS.csv
+    !Press#<material>#yyyy_mm_dd_HH-MM-SS.csv
 
 This format is based on the output of `presslog.py` and the script is designed around it. 
    
