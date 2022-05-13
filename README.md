@@ -74,7 +74,7 @@ This format is based on the output of `presslog.py` and the script is designed a
    
    `!Press` at the start of the file name identifies if this a pressure  logging file. Any files that does not have this tag and not have an extention of TXT is not loaded for analysis.
 
-  \<material\> is the user entered material from the `presslog.py` and must be sperated pound signs (#) at the start and end of the material. There is a validation of the material in the file name and the material name in the file. If there is a discrepancy, a warning is displayed.
+  `\<material\>` is the user entered material from the `presslog.py` and must be sperated pound signs (#) at the start and end of the material. There is a validation of the material in the file name and the material name in the file. If there is a discrepancy, a warning is displayed.
 
   After the material is a time stamp of when then the analysis started. It must be in the format listed above as there is a validation of the time stamp in the name and the time stamp in the file. If there is a discrepancy, a warning is displayed.
 
