@@ -2,7 +2,7 @@
 
 This code and setup was published as supporting information for **_A modified method for measuring pressure drop in non-medical face masks with automated data acquisition and analysis_** by Herman et al. in the [Journal of the International Society of Respirtory Protection](https://www.isrp.com/the-isrp-journal/complete-journal-archive-for-members-only/1255-vol-38-no-2-2021/file#page=16) (_ISRP Membership Required to View_) in December of 2021.
 
-An open access verison is also published in PubMed under the following ID: #######
+An open access verison is also published in PubMed Central under the following ID: [PMC9126268](http://www.ncbi.nlm.nih.gov/pmc/articles/pmc9126268/)
 
 ## Disclaimer
 
