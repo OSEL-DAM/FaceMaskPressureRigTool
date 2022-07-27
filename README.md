@@ -1,36 +1,44 @@
 # FaceMaskPressureRigTool
 
-This code and setup was published as supporting information for **_A modified method for measuring pressure drop in non-medical face masks with automated data acquisition and analysis_** by Herman et al. in the [Journal of the International Society of Respirtory Protection](https://www.isrp.com/the-isrp-journal/complete-journal-archive-for-members-only/1255-vol-38-no-2-2021/file#page=16) (_ISRP Membership Required to View_) in December of 2021.
+This code and setup were published as supporting information for **_A modified method for measuring pressure drop in non-medical face masks with automated data acquisition and analysis_** by Herman et al. in the [Journal of the International Society of Respiratory Protection](https://www.isrp.com/the-isrp-journal/complete-journal-archive-for-members-only/1255-vol-38-no-2-2021/file#page=16) (_ISRP Membership Required to View_) in December of 2021.
 
-An open access verison is also published in PubMed Central under the following ID: [PMC9126268](http://www.ncbi.nlm.nih.gov/pmc/articles/pmc9126268/)
+An open access version is also published in PubMed Central under the following ID: [PMC9126268](http://www.ncbi.nlm.nih.gov/pmc/articles/pmc9126268/)
 
 ## Disclaimer
 
-* This respository's contents are under a CC0 v1.0 Universal Licence.  However, this license does not govern the software needed to run or open the files in this repository and may be governed under a sperate license.
+* This repository's contents are under a CC0 v1.0 Universal License. However, this license does not govern the software needed to run or open the files in this repository and may be governed under a separate license.
 * The use of the files in this repository, the code presented in it, its dependent functions, or the software required to run it does not constitute an endorsement from the U.S. Food and Drug Administration or U.S. Department of Health and Human Services.
 
 ## Introduction
 
-This repository can be broken down into 3 parts:
+The code and setup outlined here in this repository can allow anyone with a 3D printer, a Raspberry Pi with Python 3, a computer that is able to run MATLAB to do the following:
 
-1. Pressure Plate STL
-2. Data Aquisition Python Script
-3. Data Processing MATLAB Script and Dependent Functions
+* Print the main body of the Pressure Plate
+* Record and acquire data from pressure transducers utilizing an Analog to Digital Converter (ADC) and a Raspberry Pi via Python code
+* Analyze and summarize the acquired data using MATLAB scripts.
+
+This repository can be broken down into 3 main sections:
+
+1. [Pressure Plate STL](#pressure-plate-stl)
+2. [Data Acquisition Python Script](#data-acquisition-python-script)
+3. [Data Processing MATLAB Script and Dependent Functions](#data-processing-matlab-script-and-dependent-functions)
+
+Additional requirements, such as hardware, are explained in each of the individual main sections.
 
 ## Pressure Plate STL
 
-An STL file of pressure drop rig that we used in the manuscript. Units are in millimeters. Two prints of this STL are required for the full pressure rig. One half can optionally be mirrored on the ring side to have all of the ports on the same side. The gasket shape can be created by converting to a vector file of the ring side. The two halfs and the gaskets, along with the sample under test, can be held together with 4x M3 x 0.5mm, 60mm long screws.
+An STL file of pressure drop rig that we used in the manuscript. Units are in millimeters. Two prints of this STL are required for the full pressure rig. One half can optionally be mirrored on the ring side to have all of the ports on the same side. The gasket shape can be created by converting to a vector file of the ring side. The two halves and the gaskets, along with the sample under test, can be held together with 4x M3 x 0.5mm, 60mm long screws.
 
-The main inlet and outlet ports are designed for 1/8" NPT fittings that can be RTVed or expoxied in.
+The main inlet and outlet ports are designed for 1/8" NPT fittings that can be Room Temperature Vulcanized (RTV) or epoxied in.
 
-The pressure ports designed for 1/4"-28 thread fittings that can be RTVed or expoxied in.
+The pressure ports designed for 1/4"-28 thread fittings that can be RTV or epoxied in.
 
-## Data Aquisition Python Script
+## Data Acquisition Python Script
 
-This python  script (`presslog.py`) is a CLI based script that requires:
+This python script (`presslog.py`) is a CLI based script that requires:
 * A Raspberry Pi
 * An ADS1115 16-bit ADC and its required libraries (See Below)
-* A pressure transducer module with a linear output voltage of 0 to 5 Volts (and an impedence which is compatible with the ADS1115)
+* A pressure transducer module with a linear output voltage of 0 to 5 Volts (and an impedance which is compatible with the ADS1115)
 	
 Obtain help in running the script by typing: 
 
@@ -44,15 +52,15 @@ Run the script by typing:
 
 [How to install CircuitPython Libraries from Adafruit](https://learn.adafruit.com/circuitpython-on-raspberrypi-linux/installing-circuitpython-on-raspberry-pi)
 		
-[Python Command Line Areguments Help](https://www.tutorialspoint.com/python/python_command_line_arguments.htm)
+[Python Command Line Arguments Help](https://www.tutorialspoint.com/python/python_command_line_arguments.htm)
 		
 ## Data Processing MATLAB Script and Dependent Functions
 
-The output of the `presslog.py` script will output a TXT file that can be analyzed by the MATLAB script `pAnalysis.m`[^1]. `pAnalysis.m` can handle multiple TXTs output from `presslog.py`. All TXTs, `pAnalysis.m` and all  All of the required files are in the pAnalysis directory. The scripts and functions required for processing are as follows:
+The output of the `presslog.py` script will output a TXT file that can be analyzed by the MATLAB script `pAnalysis.m`[^1]. `pAnalysis.m` can handle multiple TXTs output from `presslog.py`. All TXTs, `pAnalysis.m` and all of the required files are in the pAnalysis directory. The scripts and functions required for processing are as follows:
 
-* `pAnalysis.m` - Script for Importing and Processing the TXTs outputed from `presslog.py`
+* `pAnalysis.m` - Script for Importing and Processing the TXTs outputted from `presslog.py`
 * `pDataImport.m` - Function that Imports a specified TXT to the MATLAB workspace
-* `newMaterial.m` - Lookup table helper function to standarize material names
+* `newMaterial.m` - Lookup table helper function to standardize material names
 * `pSpike.m` - Function to detect a sudden spike in pressure
 * `pCell2CSV.m` - Function to output a MATLAB cell contents to a CSV file
 
@@ -64,7 +72,7 @@ This script is designed to read pressure data from two differential pressure tra
 
 **Requires:** MATLAB R2006a (Tested with R2020b & R2014b) 
 
-*NOTE:* The functions used in this code are compatible with versions R2006a or before. However some input parameters and Name/Value pairs might not be compatible. Make sure function inputs used here and with supplied functions are compatible with the version of MATLAB being used to run this script.
+*NOTE:* The functions used in this code are compatible with versions R2006a or before. However, some input parameters and Name/Value pairs might not be compatible. Make sure function inputs used here and with supplied functions are compatible with the version of MATLAB being used to run this script.
 
 ***IMPORTANT:*** For the grouping of materials to happen properly, the nomenclature of the pressure files name must be the following format:
 
@@ -72,33 +80,33 @@ This script is designed to read pressure data from two differential pressure tra
 
 This format is based on the output of `presslog.py` and the script is designed around it. 
    
-   `!Press` at the start of the file name identifies if this a pressure  logging file. Any files that does not have this tag and not have an extention of TXT is not loaded for analysis.
+   `!Press` at the start of the file name identifies if this a pressure logging file. Any files that do not have this tag and not have a file extension of TXT are not loaded for analysis.
 
-  `<material>` is the user entered material from the `presslog.py` and must be sperated pound signs (#) at the start and end of the material. There is a validation of the material in the file name and the material name in the file. If there is a discrepancy, a warning is displayed.
+  `<material>` is the user entered material from the `presslog.py` and must be separated pound signs (#) at the start and end of the material. There is a validation of the material in the file name and the material name in the file. If there is a discrepancy, a warning is displayed.
 
   After the material is a time stamp of when then the analysis started. It must be in the format listed above as there is a validation of the time stamp in the name and the time stamp in the file. If there is a discrepancy, a warning is displayed.
 
-*NOTE:* Only one Flow Rate Can Summarized at a time. Code assumes all Pressure Logging files and cataloged under the same flow rate. This only affects the output of `p_report` (Variable in `pAnalysis.m`) and the saved CSV
+*NOTE:* Only one Flow Rate Can Summarized at a time. Code assumes all Pressure Logging files are cataloged under the same flow rate. This only affects the output of `p_report` (Variable in `pAnalysis.m`) and the saved CSV
 
 ### pDataImport.m
 
-`pDataImport.m` is a function that imports data from a text file outputted from our pressure transducer logger program. It reads data from text file name (`filename`) passed to it and output the data from the file in a structure. This fuction is based on the text file output from `presslog.py` and reads all of the different data fields from that text file.
+`pDataImport.m` is a function that imports data from a text file outputted from our pressure transducer logger program. It reads data from text file name (`filename`) passed to it and output the data from the file in a structure. This function is based on the text file output from `presslog.py` and reads all of the different data fields from that text file.
 
 | Input Parameter | Description |
 | :---: | :--- |
 | `filename` | char array of a TXT file name to import |
 
-###  newMaterial.m
+### newMaterial.m
 
-`newMaterial.m` is a function that compares the material name (`oldname`) passed to the function against a lookup table (`oldnewnames`) and either returned the standardized name from the table in the form of a Nx2 cell array with charater vectors or returns the old name based off a input flag (`std_name`).
+`newMaterial.m` is a function that compares the material name (`oldname`) passed to the function against a lookup table (`oldnewnames`) and either returned the standardized name from the table in the form of a Nx2 cell array with character vectors or returns the old name based off an input flag (`std_name`).
 
 **Lookup Table Format (oldnewnames)**
 | Column 1 | Column 2 |
 | :---: | :---: |
-| Old Name | New to Replace Old Name in Corresponding Row |
+| Old Name | New Name to Replace Old Name in Corresponding Row |
 
 
-A standardized name will be returned if `std_name` is true and there is a match of the `oldname` in column 1 in `oldnewnames`. The standardized name will be in column 2 of the same row where the `oldname` is found in column 1 of `oldnewnames`. If no match if found or `std_name` flag is false then the `oldname` is returned.
+A standardized name will be returned if `std_name` is true and there is a match of the `oldname` in column 1 in `oldnewnames`. The standardized name will be in column 2 of the same row where the `oldname` is found in column 1 of `oldnewnames`. If no match if found or `std_name` flag is false, then the `oldname` is returned.
 
 | Input Parameter | Description |
 | :---: | :--- |
@@ -111,20 +119,20 @@ A standardized name will be returned if `std_name` is true and there is a match 
 
 | Input Parameter | Description |
 | :---: | :--- |
-| `P_data` | Pressure data vector  |
+| `P_data` | Pressure data vector |
 
 #### pSpike.m References
-
+<!--- cSpell:disable -->
 1.	"Find abrupt changes in signal - MATLAB findchangepts", Mathworks.com, 2016. [Online]. Available: https://www.mathworks.com/help/signal/ref/findchangepts.html#d123e60404. [Accessed: 04-Jun-2021]
 
 2.	P. P. Pebay, "Formulas for robust, one-pass parallel computation of covariances and arbitrary-order statistical moments,"; Sandia National Laboratories (SNL), Albuquerque, NM, and Livermore, CA (United States), SAND2008-6212; TRN: US201201%%57 United States 10.2172/1028931 TRN: US201201%%57 SNL English, 2008. [Online]. Available: https://www.osti.gov/servlets/purl/1028931
 
-3.  T. F. Chan, G. H. Golub, and R. J. LeVeque, "Algorithms for Computing the Sample Variance: Analysis and Recommendations," The American Statistician, vol. 37, no. 3, pp. 242-247, 1983, doi:10.2307/2683386.
+3.	T. F. Chan, G. H. Golub, and R. J. LeVeque, "Algorithms for Computing the Sample Variance: Analysis and Recommendations," The American Statistician, vol. 37, no. 3, pp. 242-247, 1983, doi:10.2307/2683386.
 
 4.	R. Killick, P. Fearnhead, and I. A. Eckley, "Optimal Detection of Changepoints With a Linear Computational Cost," Journal of the American Statistical Association, vol. 107, no. 500, pp. 1590-1598, 2012. [Online]. Available: http://www.jstor.org/stable/23427357.
 
 5.	J. Muñoz and C. Luengo, "Which function allow me to calculate cumulative variance over a vector?", Stack Overflow, 2019. [Online]. Available: https://stackoverflow.com/questions/58343348/. [Accessed: 04-Jun-2021].
-
+<!--- cSpell:enable -->
 ### pCell2CSV.m
 
 `pCell2CSV.m` is a function that saves a cell array to a CSV file. This function uses `fprintf` to output a CSV file. This was used to over the newer `writecell` for compatibility with older versions of MATLAB.
@@ -133,8 +141,8 @@ A standardized name will be returned if `std_name` is true and there is a match 
 | Input Parameter | Description |
 | :---: | :--- |
 | `pCell_in` | Cell Array to be saved as a CSV File |
-| `FN` | Character array of the file name of the CSV to be outputted less the file extention |
+| `FN` | Character array of the file name of the CSV to be outputted less the file extension |
 | `num_per` | Precision of the number to output in the output table |
 
 
-[^1]: Assuming the proceedure outlined in the manuscript is followed.
+[^1]: Assuming the procedure outlined in the manuscript is followed.
